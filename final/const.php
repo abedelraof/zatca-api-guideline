@@ -65,7 +65,7 @@ businessCategory=__businessCategory
 /**
  * ZATCA Origin, the URL origin we are hitting, called when sending requests 
  */
-define('ZATCA_ORIGIN', 'https://gw-fatoora.zatca.gov.sa/e-invoicing/developer-portal');
+define('ZATCA_ORIGIN', 'https://gw-fatoora.zatca.gov.sa/e-invoicing/simulation');
 
 /**
  * OS Seperator, backslash for windows, forward slash otherwise, called when dealing with file paths in general

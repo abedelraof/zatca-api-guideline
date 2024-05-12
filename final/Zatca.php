@@ -102,7 +102,7 @@ class Zatca {
      * @param string $encodedCsr The generated CSR ecnoded to Base64
      * @return array JSON response as a key-value array
      */
-    public function getCompCsid(string $encodedCsr): array
+    public function getCompCsid(string $encodedCsr, string $otp): array
     {
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL, ZATCA_ORIGIN."/compliance");
@@ -110,7 +110,7 @@ class Zatca {
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
       curl_setopt($ch, CURLOPT_HTTPHEADER, [
           'accept: application/json',
-          'OTP: 123345',
+          'OTP: ' . $otp,
           'Accept-Version: V2',
           'Content-Type: application/json',
       ]);
@@ -344,9 +344,20 @@ class Zatca {
 
         $invoice = $invoiceData['invoice'];
         $invoiceHash = $invoiceData['invoiceHash'];
-
+	echo "-----------------------------------------\n";
+	echo "-----------------------------------------\n";
+	$url = ZATCA_ORIGIN.'/invoices/reporting/single';
+	print_r([
+		"url" => $url,
+		"token" => $basicToken,
+		"clearance-status" => CLEARANCE_STATUS,
+		"invoiceHash" => $invoiceHash,
+		"uuid" => $uuid,
+		"invoice" => $invoice
+	]);
+	echo "\n";
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, ZATCA_ORIGIN.'/invoices/reporting/single');
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -360,7 +371,7 @@ class Zatca {
         curl_setopt($ch, CURLOPT_POSTFIELDS, "{\n  \"invoiceHash\": \"$invoiceHash\",\n  \"uuid\": \"$uuid\",\n  \"invoice\": \"$invoice\"\n}");
 
         $response = curl_exec($ch);
-
+	print_r("httpcode = " . curl_getinfo($ch, CURLINFO_HTTP_CODE) . "\n");
         curl_close($ch);
         echo $response;
 

@@ -3,7 +3,7 @@ oid_section=OIDS
 certificateTemplateName= 1.3.6.1.4.1.311.20.2
 [req]
 default_bits=2048
-emailAddress=abdurrahman.electronicclicks@gmail.com
+emailAddress=ceo@asaas.rent
 req_extensions=v3_req
 x509_extensions=v3_Ca
 prompt=no
@@ -11,10 +11,10 @@ default_md=sha256
 req_extensions=req_ext
 distinguished_name=dn
 [dn]
-CN=dilmun-erp.com
+CN=asaas.rent
 C=SA
 OU=Dammam Branch
-O=Electronic Clicks
+O=Property management Company
 [v3_req]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
@@ -23,7 +23,7 @@ certificateTemplateName = ASN1:PRINTABLESTRING:PREZATCA-code-Signing
 subjectAltName = dirName:alt_names
 [alt_names]
 SN=1-Model|2-3492842|3-49182743421
-UID=317460736806263
+UID=310479697700003
 title=1100
 registeredAddress=Dammam
 businessCategory=Software Development
